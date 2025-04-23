@@ -1,1 +1,78 @@
 
+import java.util.Arrays;
+
+public class fibonacci {
+
+	public static void main(String[] args) {
+	/*	int range=7;
+		fibo_series(range);
+		anagrams("listen", "silent");
+		StackusingQueue stack=new StackusingQueue();
+		stack.Stack();
+		stack.push(range);
+		stack.push(8);
+		int c=stack.pop();
+		System.out.println("popped"+c);
+		stack.top() ; */
+		permutations("cat");
+		
+	}
+	private static void  fibo_series(int range) {
+		int start=0;
+		int number=1;
+		
+		for (int i=0 ;i<=range ;i++) {
+			int next = start + number;
+            start = number;
+            number = next;
+		System.out.println(next);
+		
+		}
+	}
+private static void anagrams(String a,String b) {
+	a = a.replaceAll("\\s", "").toLowerCase();
+    b = b.replaceAll("\\s", "").toLowerCase();
+	char[] compareFirst=a.toCharArray();
+	char[] compareSecond=b.toCharArray();
+	if(compareFirst.length==compareSecond.length) {
+		Arrays.sort(compareFirst);
+		Arrays.sort(compareSecond);
+		boolean isanagram=Arrays.equals(compareFirst, compareSecond);
+		if(isanagram = true) {System.out.println("Given Strings are Anagrams");}
+		else {System.out.println("Given Strings are not Anagrams");}
+	
+	}else {System.out.println("Given Strings are not Anagrams");}
+	
+	
+}
+private static String[][] permutations(String s) {
+	char[] permutString=s.toCharArray();
+	int Length=permutString.length;
+	String[][] allpermutString= new String[Length][Length];
+	for(int i=0;i<Length-1;i++) {
+		for(int j=0;j<Length-2;j++) {
+			char temp;
+			temp=permutString[i];
+			permutString[i]=permutString[j+1];
+			permutString[j+1]=temp;
+			String string=new String(permutString);
+			allpermutString[i][j]=(permutString.toString());
+			System.out.println(" Permutation no %d is :"+j+string);
+		}
+		
+	}
+	return allpermutString;
+}	
+
+private char[] ReverseString(String s) {
+	char[] string=s.toCharArray();
+	int len=(string.length)-1;
+	char[] reversestring=new char[len];
+	for(int i=0;i==len;i++) {
+		reversestring[len-i]=string[i];
+	}
+	return reversestring;
+}
+
+}
+
