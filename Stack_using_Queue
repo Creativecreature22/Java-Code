@@ -1,1 +1,38 @@
+import java.util.ArrayDeque;
+import java.util.EmptyStackException;
+
+public class StackusingQueue {//FIFO
+	public  ArrayDeque<Integer> queue1;
+	public ArrayDeque<Integer> queue2;
+	
+	public void Stack(){//LIFO
+		this.queue1= new ArrayDeque<>();
+		this.queue2= new ArrayDeque<>();
+		
+	}
+	public void push(int element) {
+		// Checking if queue 1 is empty or not .
+		if(!queue1.isEmpty()) {
+			//passing the elements at queue 2 from queue 1.
+			while(queue1.size()>1) { 
+				queue2.offer(queue1.poll());	
+		}}
+		// Adding the value at first position.
+		queue1.offer(element);
+		// Again adding the element in queue 1 from queue 2.
+		while(queue2.size()>1) {
+			queue1.offer(queue2.poll());
+		}
+	}
+	public int pop(){
+		// Checking if queue1 is empty or not.
+		if(queue1.isEmpty()) { throw new EmptyStackException();}
+		int pop =queue1.poll();
+		return pop;
+	}
+	public int top() {
+		int top=queue1.poll();
+		return top;
+	}
+}
 
