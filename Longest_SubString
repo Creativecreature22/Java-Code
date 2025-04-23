@@ -1,1 +1,48 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+
+/* " "
+"dvdf"vdf
+"ckilbkd"ckilb
+"tmmzuxt " mzuxt*/
+
+public class Longestsub {
+
+	public static void main(String[] args) throws IOException {
+		System.out.println("Enter a value :");
+		BufferedReader s = new BufferedReader(new InputStreamReader(System.in)); 
+		String inputString= s.readLine();
+		
+		s.close();
+		inputString=inputString.replaceAll("\\s","");
+		Longestsubstring(inputString);
+	}
+	private static String Longestsubstring(String inputString) {
+		int len=(inputString.length())-1;
+		int start=0,pointer,longest=0,Start = 0;
+		HashMap<Character,Integer> map=new HashMap<>();
+		char[] charstring = inputString.toCharArray();
+		for (pointer=0;pointer<=len;pointer++) { // pointer= current variable index
+			char current=charstring[pointer];
+			
+			if(map.containsKey(current) && start<=map.get(current) ) {
+				start=map.get(current)+1;
+				
+			}
+			if(pointer-start+1>longest) {
+				longest=(pointer-start)+1;
+				Start=start;
+			}
+			map.put(current, pointer );
+			}
+
+		
+		String sub=inputString.substring(Start, Start+longest);
+		System.out.printf("Longest String of length %d is :"+sub,longest);
+	return sub;
+	}
+
+}
 
