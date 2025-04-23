@@ -1,0 +1,105 @@
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode() {
+    }
+    ListNode(int val){
+    	this.val=val;
+    }
+    ListNode(long digit) {
+        this.val = (int) digit;
+    }
+
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+public class Reverse {
+    public static void main(String[] args) {
+        // Creating two linked lists
+        ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(7))); // Represents 342
+        ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(6))); // Represents 465
+
+        // Traversing the linked lists in reverse and storing values in arrays
+        int[] arr1 = traverseAndStore(l1);
+        int[] arr2 = traverseAndStore(l2);
+
+        // Converting arrays to integers
+        int num1 = arrayToNumber(arr1);
+        int num2 = arrayToNumber(arr2);
+
+        // Adding the integers
+        int sum = num1 + num2;
+
+        // Converting sum to array
+        int[] sumArr = numberToArray(sum);
+
+        // Creating a new linked list from the array
+        ListNode result = createLinkedList(sumArr);
+
+        // Printing the result (Linked list representing the sum)
+        printLinkedList(result);
+    }
+
+    // Function to traverse linked list in reverse and store values in an array
+    private static int[] traverseAndStore(ListNode node) {
+        int length = 0;
+        ListNode temp = node;
+        while (temp != null) {
+            length++;
+            temp = temp.next;
+        }
+
+        int[] arr = new int[length];
+        temp = node;
+        int index = length - 1;
+        while (temp != null) {
+            arr[index] = temp.val;
+            index--;
+            temp = temp.next;
+        }
+        return arr;
+    }
+
+    // Function to convert array to number
+    private static int arrayToNumber(int[] arr) {
+        int num = 0;
+        for (int digit : arr) {
+            num = num * 10 + digit;
+        }
+        return num;
+    }
+
+    // Function to convert number to array
+    private static int[] numberToArray(int num) {
+        String numStr = String.valueOf(num);
+        int[] arr = new int[numStr.length()];
+        for (int i = 0; i < numStr.length(); i++) {
+            arr[i] = numStr.charAt(i) - '0';
+        }
+        return arr;
+    }
+
+    // Function to create linked list from array
+    private static ListNode createLinkedList(int[] arr) {
+        ListNode dummy = new ListNode(-1);
+        ListNode temp = dummy;
+        for (int num : arr) {
+            temp.next = new ListNode(num);
+            temp = temp.next;
+        }
+        return dummy.next;
+    }
+
+    // Function to print linked list
+    private static void printLinkedList(ListNode node) {
+        while (node != null) {
+            System.out.print(node.val + " -> ");
+            node = node.next;
+        }
+        System.out.println("null");
+    }
+}
