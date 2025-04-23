@@ -1,1 +1,64 @@
 
+public class MedianbyBinary {
+
+	public static void main(String[] args) {
+		int[] nums1= {1,2,3,5,7,8,9};
+		int[] nums2= {7,8};
+		int m= nums1.length;
+		int n=nums2.length;
+		double d=Medianbinary(nums1,nums2,m,n);
+		System.out.println(d);
+	}
+	public static double Medianbinary(int[] nums1,int[] nums2,int m,int n) {
+		int a= m;
+		int b= n;
+		if (a > b) {
+			Medianbinary(nums2,nums1, n, m);//recursive function for swapping.
+		}
+		int[] Array1= nums1;
+		int[] Array2= nums2;
+		m=m-1;
+		n=n-1;
+		int left= 0; int right= a-1; int Len= m+n; int Leftsub =(Len)/2;
+	// left pointer, right pointer, length of both arrays, left sub-sorted arrays. 
+		while(left <= right) {// loop till last binary.
+			int i= (left + right)/2; // binary search / by 2 on 1st small Array.
+			int j= Leftsub - i; // to find Left  partition from 2nd array.
+			if(i==0) {
+				if( j <= b-1 && Array1[i] > Array2[j+1]) {
+					if(Len%2== 0) {// even
+					return (Array2[j] + Array2[j+1])/2;}
+					return Array2[j];// odd555
+				}
+				if(Len%2==0) {
+				return (Array1[j] + Array2[j+1])/2;}
+				return Math.max(Array1[i],Array2[j]);
+				}
+			if(i== a) {
+					int maxleft,maxright;
+					if(Array1[i]>Array2[j+1]) {
+						maxleft=Array2[j];
+						maxright=Array2[j+1];
+					}
+					else {
+						maxleft=Array1[i];
+						maxright=Array2[j];
+						}
+					if(Len%2== 0) {// even
+						return (maxleft + maxright)/2;}
+					return Math.max(Array1[i],Array2[j]);// odd		
+				}
+			if( j < b  && Array1[i] > Array2[j+1]) {// if partition is correct by checking if partition is Small. 
+				right= i-1;// Shifting right pointer.	
+			}
+			if( i < a-1 && Array2[j] > Array1[i+1]) {// if partition is correct by checking if partition is Big.
+				left= i+1;// shifting Left pointer.
+			}
+			if(Array1[i] < Array2[j+1] && Array1[i+1] > Array2[j]) {// if Even
+				if(Len%2==0) {return (Math.max(Array1[i],Array2[j])+Math.min(Array1[i+1],Array2[j+1]))/2;}
+				return Math.max(Array1[i],Array2[j]);// if odd
+			}}
+		return 0;
+	}}
+
+
